@@ -4,7 +4,6 @@ module.exports = (app) => {
     const findAllStudent = require ('../Controller/student.findall.js')
     const findOneStudent = require ('../controller/student.findone.js')
     const updateStudent = require ('../controller/student.update.js')
-    //var passport = require('passport');
   
     app.post("/student", isLoggedIn, createStudent.create);
   

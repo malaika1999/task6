@@ -11,10 +11,7 @@ exports.create = (req, res) => {
         const student = new Student({
           name: req.body.name, 
           rollNo: req.body.rollNo,
-          dateOfBirth: req.body.dataOfBirth,
-          token : req.query.secret_token,
-          message : 'You made it to the secure route',
-          user : req.user
+          dateOfBirth: req.body.dataOfBirth
         });
         student
           .save()
@@ -28,3 +25,4 @@ exports.create = (req, res) => {
             });
         
   };
+  
