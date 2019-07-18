@@ -32,11 +32,11 @@ mongoose
   app.use(bodyParser.json()); // get information from html forms
   app.use(bodyParser.urlencoded({ extended: true }));
  
-  /*app.use(session({
+  app.use(session({
     secret: 'eminem', // session secret
     resave: true,
     saveUninitialized: true
-}));*/
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
  // mongoose.Promise = global.Promise;
@@ -48,10 +48,10 @@ require("./routes/student.routes.js")(app);
 require("./routes/department.routes.js")(app);
 require("./routes/staff.routes.js")(app);
 
-  /*app.use(function(err, req, res, next) {
+  app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error : err });
-  });*/
+  });
 
   app.listen(port);
   console.log('The magic happens on port ' + port);
