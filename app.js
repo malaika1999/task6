@@ -13,9 +13,6 @@ var session      = require('express-session');
 var authRoutes   = require('./routes/auth');
 var testRoutes  = require('./routes/test');
 var configDB     = require('./config/db');
- //app.use(passport.initialize());
-
-app.use(bodyParser.json());
 const mongoose = require("mongoose");
 
 mongoose
@@ -45,19 +42,16 @@ app.use(passport.session()); // persistent login sessions
  // mongoose.Promise = global.Promise;
 
  app.use('/auth', authRoutes);
-app.use('/test', testRoutes);
+ app.use('/test', testRoutes);
 
 require("./routes/student.routes.js")(app);
 require("./routes/department.routes.js")(app);
 require("./routes/staff.routes.js")(app);
 
-  app.use(function(err, req, res, next) {
+  /*app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error : err });
-  });
+  });*/
 
- 
-
-app.listen(3000, () => {
-  console.log("sever listening on port 3000");
-});
+  app.listen(port);
+  console.log('The magic happens on port ' + port);

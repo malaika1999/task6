@@ -5,11 +5,18 @@ module.exports = (app) => {
     const findOneDept = require ('../controller/department.findone.js')
     const updateDept = require ('../controller/department.update.js')
   
-    app.post("/department", createDept.create);
+    app.post("/department", isLoggedIn, createDept.create);
   
-    app.get("/department", findAllDept.findAll);
-    app.get("/department/:departmentId", findOneDept.findOne);
-    app.put("/department/:departmentId", updateDept.update);
-    app.delete("/department/:departmentId", deleteDept.delete);
+    app.get("/department", isLoggedIn, findAllDept.findAll);
+    app.get("/department/:departmentId", isLoggedIn, findOneDept.findOne);
+    app.put("/department/:departmentId", isLoggedIn, updateDept.update);
+    app.delete("/department/:departmentId", isLoggedIn, deleteDept.delete);
   };
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.status(400).json({
+        'message': 'access denied'
+    });
+}
   

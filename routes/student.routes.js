@@ -6,11 +6,18 @@ module.exports = (app) => {
     const updateStudent = require ('../controller/student.update.js')
     //var passport = require('passport');
   
-    app.post("/student",  createStudent.create);
+    app.post("/student", isLoggedIn, createStudent.create);
   
-    app.get("/student", findAllStudent.findAll);
-    app.get("/student/:studentId", findOneStudent.findOne);
-    app.put("/student/:studentId", updateStudent.update);
-    app.delete("/student/:studentId", deleteStudent.delete);
+    app.get("/student", isLoggedIn, findAllStudent.findAll);
+    app.get("/student/:studentId", isLoggedIn,findOneStudent.findOne);
+    app.put("/student/:studentId", isLoggedIn, updateStudent.update);
+    app.delete("/student/:studentId", isLoggedIn, deleteStudent.delete);
   };
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.status(400).json({
+        'message': 'access denied'
+    });
+}
   
